@@ -46,6 +46,6 @@ internals.login = async (req, h) => {
   }
 };
 internals.landing = async (req, h) => {
-  h.send("working");
+  return h.response("working");
 };
 module.exports = internals;

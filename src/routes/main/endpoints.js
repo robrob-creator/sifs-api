@@ -12,7 +12,7 @@ internals.endpoints = [
     },
   },
   {
-    method: "POST",
+    method: "GET",
     path: "/",
     handler: Handlers.landing,
     config: {
