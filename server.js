@@ -4,6 +4,7 @@ var HapiServer = require("./src/config/hapi");
 var Mongoose = require("mongoose");
 
 require("./src/database/mongodb");
+//add comments
 
 async function start() {
   var server = await HapiServer.deployment();
