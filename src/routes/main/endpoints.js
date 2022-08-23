@@ -11,6 +11,14 @@ internals.endpoints = [
       auth: false,
     },
   },
+  {
+    method: "POST",
+    path: "/",
+    handler: Handlers.landing,
+    config: {
+      auth: false,
+    },
+  },
 ];
 
 module.exports = internals;
