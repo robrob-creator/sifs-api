@@ -5,7 +5,7 @@ const User = require("../../database/models/User");
 
 var internals = {};
 
-internals.create_student = async (req, h) => {
+internals.create_user = async (req, h) => {
   try {
     const hashedPassword = await bcrypt.hash(req.payload.password, 10);
     var payload = { ...req.payload, password: hashedPassword };

@@ -8,7 +8,7 @@ const Config = require("../../config");
 var internals = {};
 
 internals.login = async (req, h) => {
-  const { idNo, password } = req.payload;
+  const { idNo, password, role } = req.payload;
   try {
     let _profile = await User.findOne({ idNo });
     if (!_profile) {
@@ -26,7 +26,7 @@ internals.login = async (req, h) => {
         })
         .code(405);
     }
-    if (!_profile?.role?.includes("admin")) {
+    if (!_profile?.role?.includes(role)) {
       return h
         .response({
           message: "Unauthorized.",

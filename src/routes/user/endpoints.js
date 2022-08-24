@@ -5,10 +5,10 @@ var Handlers = require("./handlers"),
 internals.endpoints = [
   {
     method: "POST",
-    path: "/student",
-    handler: Handlers.create_student,
+    path: "/user",
+    handler: Handlers.create_user,
     config: {
-      auth: false,
+      auth: "token",
     },
   },
 ];
