@@ -15,9 +15,11 @@ exports.deployment = async () => {
 
   // Host and Port Config
   internals.server = new Hapi.Server({
-    port: 8080,
+    port: process.env.PORT || 8080,
     routes: {
-      cors: true,
+      cors: {
+        origin: ["*"], // an array of origins or 'ignore'
+      },
     },
   });
 

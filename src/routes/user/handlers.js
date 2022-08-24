@@ -5,17 +5,65 @@ const User = require("../../database/models/User");
 
 var internals = {};
 
+internals.profile = async (req, reply) => {
+  try {
+    let _profile = await User.findOne({
+      idNo: req.auth.credentials.idNo,
+    });
+
+    let profile = JSON.parse(JSON.stringify(_profile));
+    delete profile.password;
+    delete profile.__v;
+    delete profile.createdAt;
+    delete profile.updatedAt;
+
+    return reply
+      .response({
+        message: "Success.",
+        data: {
+          profile,
+        },
+      })
+      .code(200);
+  } catch (e) {
+    console.log(e);
+    return reply
+      .response({
+        errorMessage: e,
+      })
+      .code(500);
+  }
+};
+
 internals.create_user = async (req, h) => {
   try {
     const hashedPassword = await bcrypt.hash(req.payload.password, 10);
     var payload = { ...req.payload, password: hashedPassword };
-    var student = new User(payload);
-    var result = await student.save();
+    var userData = new User(payload);
+    var result = await userData.save();
     return h.response(result);
   } catch (error) {
     console.log(error);
     return h.response(error).code(500);
   }
 };
+internals.get_user = async (req, h) => {
+  let { id, role } = req.query;
+  let query = {};
 
+  try {
+    if (role) {
+      query = { ...query, role: { $in: [role] } };
+    }
+    let list = await User.find(query);
+    return h
+      .response({
+        errorCodes: [],
+        data: {
+          list,
+        },
+      })
+      .code(200);
+  } catch (err) {}
+};
 module.exports = internals;

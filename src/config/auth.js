@@ -11,15 +11,12 @@ internals.validate = async (decodedToken, req, h) => {
 };
 
 internals.setAuthStrategy = async function (server) {
-  await server.register({
-    plugin: require("hapi-auth-jwt2"),
-  });
+  await server.register(require("hapi-auth-jwt2"));
 
   server.auth.strategy("token", "jwt", {
-    key: config.crypto.privateKey,
+    key: "NeverShareYourSecret", // Never Share your secret key
     validate: internals.validate,
   });
-
   server.auth.default("token");
 };
 

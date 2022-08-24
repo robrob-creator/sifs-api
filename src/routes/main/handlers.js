@@ -7,12 +7,12 @@ const Config = require("../../config");
 
 var internals = {};
 
-internals.login = async (req, h) => {
+internals.login = async (req, res) => {
   const { idNo, password, role } = req.payload;
   try {
     let _profile = await User.findOne({ idNo });
     if (!_profile) {
-      return h
+      return res
         .response({
           message: "ID no. invalid.",
         })
@@ -20,14 +20,14 @@ internals.login = async (req, h) => {
     }
     let validPass = await bcrypt.compare(password, _profile.password);
     if (!validPass) {
-      return h
+      return res
         .response({
           message: "Incorrect password.",
         })
         .code(405);
     }
     if (!_profile?.role?.includes(role)) {
-      return h
+      return res
         .response({
           message: "Unauthorized.",
         })
@@ -38,7 +38,7 @@ internals.login = async (req, h) => {
     delete profile.__v;
     delete profile.createdAt;
     delete profile.updatedAt;
-    return h
+    return res
       .response({
         message: "Success",
         data: {
@@ -49,7 +49,7 @@ internals.login = async (req, h) => {
       .code(200);
   } catch (error) {
     console.log(error);
-    return h.response(error).code(500);
+    return res.response(error).code(500);
   }
 };
 

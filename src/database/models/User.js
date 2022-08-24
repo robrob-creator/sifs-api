@@ -53,7 +53,7 @@ const UserSchema = new mongoose.Schema(
     role: { type: Array },
     idNo: { type: String, required: true },
     password: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String },
     strand_track: String,
     subjects: {
       type: [SubjectSchema],
