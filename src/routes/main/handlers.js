@@ -26,6 +26,13 @@ internals.login = async (req, h) => {
         })
         .code(405);
     }
+    if (!_profile?.role?.includes("admin")) {
+      return h
+        .response({
+          message: "Unauthorized.",
+        })
+        .code(401);
+    }
     let profile = JSON.parse(JSON.stringify(_profile));
     delete profile.password;
     delete profile.__v;
@@ -45,7 +52,5 @@ internals.login = async (req, h) => {
     return h.response(error).code(500);
   }
 };
-internals.landing = async (req, h) => {
-  return h.response("working");
-};
+
 module.exports = internals;

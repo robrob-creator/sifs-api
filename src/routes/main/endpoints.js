@@ -11,14 +11,6 @@ internals.endpoints = [
       auth: false,
     },
   },
-  {
-    method: "GET",
-    path: "/",
-    handler: Handlers.landing,
-    config: {
-      auth: false,
-    },
-  },
 ];
 
 module.exports = internals;
