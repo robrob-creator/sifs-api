@@ -21,5 +21,30 @@ internals.create_subject = async (req, res) => {
     return res.response(error).code(500);
   }
 };
+internals.getSubject = async (req, h) => {
+  let { pageSize, page } = req.query;
+  let query = {};
 
+  try {
+    let list = await Subjects.find()
+      .limit(pageSize)
+      .skip(page * pageSize);
+    return h
+      .response({
+        errorCodes: [],
+        data: {
+          list,
+        },
+      })
+      .code(200);
+  } catch (err) {
+    console.log(err);
+    return h
+      .response({
+        errorCodes: [],
+        message: "error",
+      })
+      .code(200);
+  }
+};
 module.exports = internals;
