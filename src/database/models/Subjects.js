@@ -6,13 +6,9 @@ var SubjectSchema = new Schema(
     name: {
       //FILIPINO,ENGLISH, MATH
       type: String,
+      require: true,
     },
-    teacher: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+
     description: {
       type: String,
       required: false,
