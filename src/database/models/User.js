@@ -18,7 +18,7 @@ var GradeSchema = new mongoose.Schema(
   { _id: false, timestamps: true }
 );
 
-var SubjectSchema = new mongoose.Schema(
+var SubjectGradeSchema = new mongoose.Schema(
   {
     name: {
       //FILIPINO,ENGLISH, MATH
@@ -56,7 +56,7 @@ const UserSchema = new mongoose.Schema(
     email: { type: String },
     strand_track: String,
     subjects: {
-      type: [SubjectSchema],
+      type: [SubjectGradeSchema],
     },
   },
   { timestamps: true }
