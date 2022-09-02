@@ -49,12 +49,12 @@ var SectionSchema = new Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Subjects",
         },
-        teacher: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        teacher: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
       },
     ],
     updatorId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Users",
     },
   },
   { timestamps: true }

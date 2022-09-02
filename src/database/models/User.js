@@ -12,7 +12,7 @@ var GradeSchema = new mongoose.Schema(
     },
     updatorId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Users",
     },
   },
   { _id: false, timestamps: true }
@@ -26,7 +26,7 @@ var SubjectGradeSchema = new mongoose.Schema(
     },
     teacher: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Users",
     },
     remarks: {
       type: String,
@@ -37,7 +37,7 @@ var SubjectGradeSchema = new mongoose.Schema(
     },
     updatorId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Users",
     },
   },
   { _id: false, timestamps: true }
@@ -62,4 +62,4 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Users", UserSchema);

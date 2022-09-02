@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Config = require("../../config");
 const Section = require("../../database/models/Section");
+const Subjects = require("../../database/models/Subjects");
 const ObjectId = require("mongoose").Types.ObjectId;
 var internals = {};
 
@@ -33,6 +34,8 @@ internals.getSection = async (req, h) => {
 
   try {
     let list = await Section.find(query)
+      .populate("subjects.subject")
+      .populate("subjects.teacher")
       .limit(pageSize)
       .skip(page * pageSize);
     return h
