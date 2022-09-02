@@ -56,4 +56,14 @@ internals.getSection = async (req, h) => {
       .code(200);
   }
 };
+internals.addSubject = async (req, res) => {
+  const updatorId = req.auth.credentials._id;
+  const id = req.params.id;
+  const filter = { _id: id };
+  const payload = { subjects: req.payload };
+
+  let r = await Section.findOneAndUpdate(filter, payload);
+  console.log(r);
+  return res.response(r);
+};
 module.exports = internals;
