@@ -24,7 +24,7 @@ internals.endpoints = [
   {
     method: ["POST"],
     path: "/edit-section/{id}",
-    handler: Handlers.addStudent,
+    handler: Handlers.edit_section,
     config: { auth: "token" },
   },
 ];
