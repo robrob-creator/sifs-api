@@ -64,6 +64,17 @@ internals.addSubject = async (req, res) => {
 
   let r = await Section.findOneAndUpdate(filter, payload);
   console.log(r);
-  return res.response(r);
+  return res.response({ message: "success" }).code(200);
+};
+
+internals.addStudent = async (req, res) => {
+  const updatorId = req.auth.credentials._id;
+  const id = req.params.id;
+  const filter = { _id: id };
+  const payload = { students: req.payload };
+
+  let r = await Section.findOneAndUpdate(filter, payload);
+  console.log(r);
+  return res.response({ message: "success" }).code(200);
 };
 module.exports = internals;

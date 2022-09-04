@@ -21,6 +21,12 @@ internals.endpoints = [
     handler: Handlers.addSubject,
     config: { auth: "token" },
   },
+  {
+    method: ["POST"],
+    path: "/section-add-student/{id}",
+    handler: Handlers.addStudent,
+    config: { auth: "token" },
+  },
 ];
 
 module.exports = internals;

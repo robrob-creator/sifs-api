@@ -42,6 +42,7 @@ var SectionSchema = new Schema(
         },
         grades: [GradeSchema],
       },
+      { _id: false, timestamps: false },
     ],
     subjects: [
       {
