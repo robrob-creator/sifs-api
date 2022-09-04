@@ -38,6 +38,10 @@ var SectionSchema = new Schema(
       type: String,
       require: true,
     },
+    gradeLevel: {
+      type: String,
+      require: true,
+    },
     students: [
       {
         student: {
