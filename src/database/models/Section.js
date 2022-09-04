@@ -38,7 +38,7 @@ var SectionSchema = new Schema(
       {
         student: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
+          ref: "Users",
         },
         grades: [GradeSchema],
       },

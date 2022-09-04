@@ -35,6 +35,7 @@ internals.getSection = async (req, h) => {
   try {
     let list = await Section.find(query)
       .populate("subjects.subject")
+      .populate("students.student")
       .populate("subjects.teacher")
       .limit(pageSize)
       .skip(page * pageSize);
