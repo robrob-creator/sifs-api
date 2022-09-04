@@ -8,10 +8,10 @@ const ObjectId = require("mongoose").Types.ObjectId;
 var internals = {};
 
 internals.create_grade = async (req, res) => {
-  const updatorId = req.auth.credentials._id;
+  const gradedBy = req.auth.credentials._id;
   var subjectData = new Grade({
     ...req.payload,
-    updatorId,
+    gradedBy,
   });
   try {
     let result = await subjectData.save();
