@@ -62,5 +62,5 @@ var SectionSchema = new Schema(
   { timestamps: true }
 );
 
-const Section = mongoose.model("Section", SectionSchema);
-module.exports = Section;
+const Sections = mongoose.model("Sections", SectionSchema);
+module.exports = Sections;

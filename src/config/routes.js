@@ -7,12 +7,14 @@ let Student = require("../routes/user/endpoints");
 let Main = require("../routes/main/endpoints");
 let Subject = require("../routes/subject/endpoints");
 let Section = require("../routes/section/endpoints");
+let Grade = require("../routes/grade/endpoints");
 
 internals.routes = [
   ...Student.endpoints,
   ...Main.endpoints,
   ...Subject.endpoints,
   ...Section.endpoints,
+  ...Grade.endpoints,
 ];
 
 internals.init = function (server) {
