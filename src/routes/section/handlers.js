@@ -78,4 +78,25 @@ internals.addStudent = async (req, res) => {
   console.log(r);
   return res.response({ message: "success" }).code(200);
 };
+internals.addStudentGrade = async (req, res) => {
+  const updatorId = req.auth.credentials._id;
+  const id = req.params.id;
+  const filter = { _id: id };
+  const payload = { students: req.payload };
+
+  let r = await Section.findOneAndUpdate(filter, payload);
+  console.log(r);
+  return res.response({ message: "success" }).code(200);
+};
+
+internals.edit_section = async (req, res) => {
+  const updatorId = req.auth.credentials._id;
+  const id = req.params.id;
+  const filter = { _id: id };
+  const payload = { ...req.payload, updatorId };
+
+  let r = await Section.findOneAndUpdate(filter, payload);
+  console.log(r);
+  return res.response({ message: "success" }).code(200);
+};
 module.exports = internals;

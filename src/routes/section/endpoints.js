@@ -23,7 +23,7 @@ internals.endpoints = [
   },
   {
     method: ["POST"],
-    path: "/section-add-student/{id}",
+    path: "/edit-section/{id}",
     handler: Handlers.addStudent,
     config: { auth: "token" },
   },
