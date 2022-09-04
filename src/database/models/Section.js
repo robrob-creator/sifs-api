@@ -34,6 +34,10 @@ var SectionSchema = new Schema(
       type: String,
       require: true,
     },
+    semester: {
+      type: String,
+      require: true,
+    },
     students: [
       {
         student: {
