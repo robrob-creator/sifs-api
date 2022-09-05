@@ -9,17 +9,40 @@ var internals = {};
 
 internals.create_grade = async (req, res) => {
   const gradedBy = req.auth.credentials._id;
+  const { gradingPeriod, semester, schoolYear, section, student } = req.payload;
   var subjectData = new Grade({
     ...req.payload,
     gradedBy,
   });
   try {
-    let result = await subjectData.save();
-    return res.response(result).code(200);
+    let grades = await Grade.find({
+      $and: [
+        { gradingPeriod },
+        { semester },
+        { schoolYear },
+        { section },
+        { student },
+      ],
+    });
+
+    if (grades === []) {
+      return res
+        .response({ message: "Student Already graded for this Subject" })
+        .code(422);
+    } else {
+      let result = await subjectData.save();
+      return res.response(result).code(200);
+    }
   } catch (error) {
     console.log(error);
     return res.response(error).code(500);
   }
+  /*try {
+   
+  } catch (error) {
+    console.log(error);
+    return res.response(error).code(500);
+  }*/
 };
 internals.getGrades = async (req, h) => {
   let { pageSize, page, section, semester, gradingPeriod, schoolYear } =
