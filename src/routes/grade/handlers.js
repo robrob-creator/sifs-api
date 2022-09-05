@@ -9,7 +9,8 @@ var internals = {};
 
 internals.create_grade = async (req, res) => {
   const gradedBy = req.auth.credentials._id;
-  const { gradingPeriod, semester, schoolYear, section, student } = req.payload;
+  const { gradingPeriod, semester, schoolYear, section, student, subject } =
+    req.payload;
   var gradeData = new Grade({
     ...req.payload,
     gradedBy,
@@ -22,6 +23,7 @@ internals.create_grade = async (req, res) => {
         { schoolYear },
         { section },
         { student },
+        { subject },
       ],
     });
 
