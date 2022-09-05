@@ -24,8 +24,8 @@ internals.create_grade = async (req, res) => {
         { student },
       ],
     });
-
-    if (grades === []) {
+    console.log(grades);
+    if (grades !== []) {
       return res
         .response({ message: "Student Already graded for this Subject" })
         .code(422);
