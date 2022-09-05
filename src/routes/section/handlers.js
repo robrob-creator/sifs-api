@@ -31,6 +31,7 @@ internals.getSection = async (req, h) => {
     gradeLevel,
     gradingPeriod,
     semester,
+    id,
   } = req.query;
   let query = {};
   if (schoolYear) {
@@ -47,6 +48,9 @@ internals.getSection = async (req, h) => {
   }
   if (semester) {
     query = { ...query, semester: new RegExp(semester, "i") };
+  }
+  if (id) {
+    query = { ...query, _id: id };
   }
   try {
     let list = await Section.find(query)
