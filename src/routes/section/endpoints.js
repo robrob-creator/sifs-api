@@ -17,6 +17,12 @@ internals.endpoints = [
   },
   {
     method: ["POST"],
+    path: "/section-add-student/{id}",
+    handler: Handlers.addStudent,
+    config: { auth: "token" },
+  },
+  {
+    method: ["POST"],
     path: "/section-add-subject/{id}",
     handler: Handlers.addSubject,
     config: { auth: "token" },
