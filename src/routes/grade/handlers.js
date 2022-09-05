@@ -49,8 +49,15 @@ internals.create_grade = async (req, res) => {
   }*/
 };
 internals.getGrades = async (req, h) => {
-  let { pageSize, page, section, semester, gradingPeriod, schoolYear } =
-    req.query;
+  let {
+    pageSize,
+    page,
+    section,
+    semester,
+    gradingPeriod,
+    schoolYear,
+    student,
+  } = req.query;
   let query = {};
   if (section) {
     query = { ...query, section };
@@ -63,6 +70,9 @@ internals.getGrades = async (req, h) => {
   }
   if (schoolYear) {
     query = { ...query, schoolYear };
+  }
+  if (student) {
+    query = { ...query, student };
   }
   try {
     let list = await Grade.find(query)
