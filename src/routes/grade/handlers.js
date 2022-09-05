@@ -62,6 +62,8 @@ internals.getGrades = async (req, h) => {
   }
   try {
     let list = await Grade.find(query)
+      .populate("subject")
+      .populate("student")
       .limit(pageSize)
       .skip(page * pageSize);
     return h
