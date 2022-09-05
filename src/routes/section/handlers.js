@@ -23,7 +23,15 @@ internals.create_section = async (req, res) => {
   }
 };
 internals.getSection = async (req, h) => {
-  let { pageSize, page, schoolYear, name } = req.query;
+  let {
+    pageSize,
+    page,
+    schoolYear,
+    name,
+    gradeLevel,
+    gradingPeriod,
+    semester,
+  } = req.query;
   let query = {};
   if (schoolYear) {
     query = { ...query, schoolYear: new RegExp(schoolYear, "i") };
@@ -31,7 +39,15 @@ internals.getSection = async (req, h) => {
   if (name) {
     query = { ...query, name: new RegExp(name, "i") };
   }
-
+  if (gradeLevel) {
+    query = { ...query, gradeLevel };
+  }
+  if (gradingPeriod) {
+    query = { ...query, gradingPeriod };
+  }
+  if (semester) {
+    query = { ...query, semester: new RegExp(semester, "i") };
+  }
   try {
     let list = await Section.find(query)
       .populate("subjects.subject")
