@@ -19,7 +19,7 @@ var SubjectSchema = new Schema(
     },
     updatorId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Users",
     },
   },
   { timestamps: true }

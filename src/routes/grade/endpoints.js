@@ -15,6 +15,13 @@ internals.endpoints = [
     handler: Handlers.getGrades,
     config: { auth: "token" },
   },
+  {
+    method: "GET",
+    path: "/grade/{id}",
+    handler: Handlers.getGradesByStudent,
+    config: { auth: "token" },
+  
+  }
 ];
 
 module.exports = internals;
