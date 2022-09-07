@@ -98,4 +98,58 @@ internals.getGrades = async (req, h) => {
       .code(200);
   }
 };
+internals.getGradesByStudent = async (req, h) => {
+  const id = req.params.id;
+  let {
+    pageSize,
+    page,
+    section,
+    semester,
+    gradingPeriod,
+    schoolYear,
+    student,
+  } = req.query;
+  let query = {};
+  if (section) {
+    query = { ...query, section };
+  }
+  if (semester) {
+    query = { ...query, semester };
+  }
+  if (gradingPeriod) {
+    query = { ...query, gradingPeriod };
+  }
+  if (schoolYear) {
+    query = { ...query, schoolYear };
+  }
+  if (student) {
+    query = { ...query, student };
+  }
+  if (id) {
+    query = { ...query, student: id };
+  }
+  try {
+    let list = await Grade.find(query)
+      .populate("subject")
+      .populate("student")
+      .limit(pageSize)
+      .skip(page * pageSize);
+    return h
+      .response({
+        errorCodes: [],
+        data: {
+          list,
+        },
+      })
+      .code(200);
+  } catch (err) {
+    console.log(err);
+    return h
+      .response({
+        errorCodes: [],
+        message: "error",
+      })
+      .code(200);
+  }
+};
 module.exports = internals;
