@@ -32,6 +32,7 @@ internals.getSection = async (req, h) => {
     gradingPeriod,
     semester,
     id,
+    student,
   } = req.query;
   let query = {};
   if (schoolYear) {
@@ -39,6 +40,9 @@ internals.getSection = async (req, h) => {
   }
   if (name) {
     query = { ...query, name: new RegExp(name, "i") };
+  }
+  if (student) {
+    query = { ...query, student: { $in: [student] } };
   }
   if (gradeLevel) {
     query = { ...query, gradeLevel };
