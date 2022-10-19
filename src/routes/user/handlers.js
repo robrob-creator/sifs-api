@@ -82,4 +82,15 @@ internals.get_user = async (req, h) => {
       .code(200);
   } catch (err) {}
 };
+
+internals.updateRole = async (req, res) => {
+  const id = req.params.id;
+  const filter = { _id: id };
+  const payload = { ...req.payload };
+
+  let r = await User.findOneAndUpdate(filter, payload);
+  console.log(r);
+  return res.response({ message: "success" }).code(200);
+};
+
 module.exports = internals;

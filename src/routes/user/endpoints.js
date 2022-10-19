@@ -25,6 +25,12 @@ internals.endpoints = [
       },
     },
   },
+  {
+    method: "POST",
+    path: "/update-role/{id}",
+    handler: Handlers.updateRole,
+    config: { auth: "token" },
+  },
 ];
 
 module.exports = internals;
