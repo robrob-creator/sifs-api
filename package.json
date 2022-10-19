@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^20.2.2",
+    "@vonage/server-sdk": "^2.11.2",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "blubird": "^0.0.1-security",

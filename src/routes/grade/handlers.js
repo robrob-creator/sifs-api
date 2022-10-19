@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const Config = require("../../config");
 const Grade = require("../../database/models/Grade");
 const ObjectId = require("mongoose").Types.ObjectId;
+const vonage = require("../../vonage");
 var internals = {};
 
 internals.create_grade = async (req, res) => {
@@ -150,6 +151,18 @@ internals.getGradesByStudent = async (req, h) => {
         message: "error",
       })
       .code(200);
+  }
+};
+internals.sendSMS = async (req, res) => {
+  const from = "Vonage APIs";
+  const to = "639367440921";
+  const text = "A text message sent using the Vonage SMS API";
+  try {
+    let res = await vonage.message.sendSms(from, to, text);
+
+    return res.response({ message: "success" });
+  } catch (err) {
+    return res.response({ message: "err" });
   }
 };
 module.exports = internals;
