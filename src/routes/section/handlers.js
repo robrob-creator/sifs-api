@@ -42,7 +42,7 @@ internals.getSection = async (req, h) => {
     query = { ...query, name: new RegExp(name, "i") };
   }
   if (student) {
-    query = { ...query, students: { $in: [student] } };
+    query = { ...query, "students.student": { $in: [student] } };
   }
   if (gradeLevel) {
     query = { ...query, gradeLevel };
