@@ -33,6 +33,7 @@ internals.getSection = async (req, h) => {
     semester,
     id,
     student,
+    teacher,
   } = req.query;
   let query = {};
   if (schoolYear) {
@@ -43,6 +44,9 @@ internals.getSection = async (req, h) => {
   }
   if (student) {
     query = { ...query, "students.student": { $in: [student] } };
+  }
+  if (teacher) {
+    query = { ...query, "subjects.teacher": { $in: [teacher] } };
   }
   if (gradeLevel) {
     query = { ...query, gradeLevel };
@@ -123,4 +127,5 @@ internals.edit_section = async (req, res) => {
   console.log(r);
   return res.response({ message: "success" }).code(200);
 };
+
 module.exports = internals;
