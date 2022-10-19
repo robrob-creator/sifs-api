@@ -68,6 +68,9 @@ internals.get_user = async (req, h) => {
     if (role) {
       query = { ...query, role: { $in: [role] } };
     }
+    if (id) {
+      query = { ...query, id };
+    }
     let list = await User.find(query);
     return h
       .response({
