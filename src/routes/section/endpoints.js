@@ -33,6 +33,12 @@ internals.endpoints = [
     handler: Handlers.edit_section,
     config: { auth: "token" },
   },
+  {
+    method: ["POST"],
+    path: "/delete-section/{id}",
+    handler: Handlers.delete_section,
+    config: { auth: "token" },
+  },
 ];
 
 module.exports = internals;
