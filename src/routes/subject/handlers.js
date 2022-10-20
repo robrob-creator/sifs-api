@@ -1,5 +1,6 @@
 "use strict";
 
+const { query } = require("@hapi/hapi/lib/validation");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Config = require("../../config");
@@ -22,11 +23,13 @@ internals.create_subject = async (req, res) => {
   }
 };
 internals.getSubject = async (req, h) => {
-  let { pageSize, page } = req.query;
+  let { pageSize, page, deleted } = req.query;
   let query = {};
-
+  if (deleted) {
+    let query = { ...query, deleted };
+  }
   try {
-    let list = await Subjects.find()
+    let list = await Subjects.find(query)
       .limit(pageSize)
       .skip(page * pageSize);
     return h
@@ -47,7 +50,7 @@ internals.getSubject = async (req, h) => {
       .code(200);
   }
 };
-internals.delete_section = async (req, res) => {
+internals.delete_subjects = async (req, res) => {
   const updatorId = req.auth.credentials._id;
   const id = req.params.id;
   const filter = { _id: id };
