@@ -8,7 +8,10 @@ var SubjectSchema = new Schema(
       type: String,
       require: true,
     },
-
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
     description: {
       type: String,
       required: false,
