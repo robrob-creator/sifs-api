@@ -42,6 +42,10 @@ var SectionSchema = new Schema(
       type: String,
       require: true,
     },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
     students: [
       {
         student: {

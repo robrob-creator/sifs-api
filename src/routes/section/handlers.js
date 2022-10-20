@@ -34,6 +34,7 @@ internals.getSection = async (req, h) => {
     id,
     student,
     teacher,
+    deleted,
   } = req.query;
   let query = {};
   if (schoolYear) {
@@ -50,6 +51,9 @@ internals.getSection = async (req, h) => {
   }
   if (gradeLevel) {
     query = { ...query, gradeLevel };
+  }
+  if (deleted) {
+    query = { ...query, deleted };
   }
   if (gradingPeriod) {
     query = { ...query, gradingPeriod };
