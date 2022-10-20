@@ -26,7 +26,7 @@ internals.getSubject = async (req, h) => {
   let { pageSize, page, deleted } = req.query;
   let query = {};
   if (deleted) {
-    let query = { ...query, deleted };
+    query = { ...query, deleted };
   }
   try {
     let list = await Subjects.find(query)
