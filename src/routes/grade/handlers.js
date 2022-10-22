@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Config = require("../../config");
 const Grade = require("../../database/models/Grade");
+const Section = require("../../database/models/Section");
 const ObjectId = require("mongoose").Types.ObjectId;
 var internals = {};
 
@@ -11,10 +12,12 @@ internals.create_grade = async (req, res) => {
   const gradedBy = req.auth.credentials._id;
   const { gradingPeriod, semester, schoolYear, section, student, subject } =
     req.payload;
+
   var gradeData = new Grade({
     ...req.payload,
     gradedBy,
   });
+
   try {
     let grades = await Grade.find({
       $and: [
@@ -56,6 +59,7 @@ internals.getGrades = async (req, h) => {
     semester,
     gradingPeriod,
     schoolYear,
+    subject,
     student,
   } = req.query;
   let query = {};
@@ -150,6 +154,24 @@ internals.getGradesByStudent = async (req, h) => {
         message: "error",
       })
       .code(200);
+  }
+};
+
+internals.sendSMS = async (req, res) => {
+  const { gradingPeriod, semester, schoolYear, section, student, subject } =
+    req.payload;
+
+  try {
+    let target = await Section.find({ section });
+    let gradeCount = await Grade.count({ section, student, gradingPeriod });
+    console.log("lenght", target[0]?.subjects.length);
+    return {
+      target: target[0]?.subjects.length,
+      gradeCount,
+    };
+  } catch (err) {
+    console.log(err);
+    return { message: err };
   }
 };
 module.exports = internals;

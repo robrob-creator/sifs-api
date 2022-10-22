@@ -10,6 +10,12 @@ internals.endpoints = [
     config: { auth: "token" },
   },
   {
+    method: "POST",
+    path: "/grade-sms",
+    handler: Handlers.sendSMS,
+    config: { auth: "token" },
+  },
+  {
     method: "GET",
     path: "/grade",
     handler: Handlers.getGrades,
@@ -20,8 +26,7 @@ internals.endpoints = [
     path: "/grade/{id}",
     handler: Handlers.getGradesByStudent,
     config: { auth: "token" },
-  
-  }
+  },
 ];
 
 module.exports = internals;
