@@ -5,6 +5,9 @@ const jwt = require("jsonwebtoken");
 const Config = require("../../config");
 const Grade = require("../../database/models/Grade");
 const Section = require("../../database/models/Section");
+const Subjects = require("../../database/models/Subjects");
+const Semaphore = require("semaphore.co-sms");
+const User = require("../../database/models/User");
 const ObjectId = require("mongoose").Types.ObjectId;
 var internals = {};
 
@@ -35,13 +38,37 @@ internals.create_grade = async (req, res) => {
       console.log(true);
       let target = await Section.find({ section });
       let targetCount = target[0]?.subjects.length;
-      let gradeCount = await Grade.count({ section, student, gradingPeriod });
-      if (targetCount === gradeCount) {
+      let user = await User.find({ student });
+      let phoneNumber = user[0]?.phoneNumber;
+      let grade = await Grade.find({
+        section,
+        student,
+        gradingPeriod,
+      }).populate("subject");
+
+      if (targetCount === grade.length) {
+        let gradeMsg = grade
+          .map((item, index) => `${item?.subject?.name}:${item.grade}`)
+          .join("\n");
+
+        let SendSMS = async () => {
+          let obj = {
+            apikey: process.env.API_KEY,
+            number: phoneNumber,
+            message: `Your grades has been uploaded \n${gradeMsg}`, // or the sendername you applied for
+          };
+          let response = await Semaphore.send(obj);
+          console.log(response);
+        };
+
+        SendSMS();
         return res
           .response({
             message: "complete",
             target: target[0]?.subjects.length,
-            gradeCount,
+            gradeCount: grade.length,
+            phoneNumber,
+            gradeMsg,
           })
           .code(200);
       }
@@ -49,7 +76,8 @@ internals.create_grade = async (req, res) => {
         .response({
           message: "incomplete",
           target: target[0]?.subjects.length,
-          gradeCount,
+          gradeCount: grade.length,
+          phoneNumber,
         })
         .code(200);
     } else {
@@ -110,6 +138,7 @@ internals.getGrades = async (req, h) => {
         errorCodes: [],
         data: {
           list,
+          Key: process.env.API_KEY,
         },
       })
       .code(200);
@@ -185,18 +214,30 @@ internals.sendSMS = async (req, res) => {
   try {
     let target = await Section.find({ section });
     let targetCount = target[0]?.subjects.length;
-    let gradeCount = await Grade.count({ section, student, gradingPeriod });
+    let gradeCount = await Grade.find({
+      section,
+      student,
+      gradingPeriod,
+    }).populate("subject");
+    let sub = await Subjects.find({ subject });
+    let gradeMsg = gradeCount
+      .map((item, index) => `${item?.subject?.name}:${item.grade} \n`)
+      .join(",");
     if (targetCount === gradeCount) {
       return {
         message: "complete",
         target: target[0]?.subjects.length,
-        gradeCount,
+        gradeCount: gradeCount.length,
+        gradeMsg,
       };
     }
     return {
       message: "incomplete",
       target: target[0]?.subjects.length,
-      gradeCount,
+      gradeCount: gradeCount.length,
+      cas: gradeCount[0]?.subject?.name,
+      subject: sub,
+      gradeMsg,
     };
   } catch (err) {
     console.log(err);

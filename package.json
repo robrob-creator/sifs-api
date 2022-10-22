@@ -30,7 +30,8 @@
     "node-color-log": "^10.0.2",
     "path": "^0.12.7",
     "semaphore": "^1.1.0",
-    "semaphore-sms": "^0.0.1"
+    "semaphore-sms": "^0.0.1",
+    "semaphore.co-sms": "^1.0.2"
   },
   "engines": {
     "node": "v16.15.0",
