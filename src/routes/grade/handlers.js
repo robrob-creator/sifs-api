@@ -66,6 +66,9 @@ internals.getGrades = async (req, h) => {
   if (section) {
     query = { ...query, section };
   }
+  if (subject) {
+    query = { ...query, subject };
+  }
   if (semester) {
     query = { ...query, semester };
   }
