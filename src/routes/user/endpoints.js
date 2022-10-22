@@ -10,6 +10,12 @@ internals.endpoints = [
     config: { auth: "token" },
   },
   {
+    method: "POST",
+    path: "/user/{id}",
+    handler: Handlers.edit_user,
+    config: { auth: "token" },
+  },
+  {
     method: "GET",
     path: "/users",
     handler: Handlers.get_user,
