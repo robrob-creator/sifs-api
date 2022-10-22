@@ -33,7 +33,25 @@ internals.create_grade = async (req, res) => {
     if (grades == [] || grades == null || grades == "") {
       let result = await gradeData.save();
       console.log(true);
-      return res.response(result).code(200);
+      let target = await Section.find({ section });
+      let targetCount = target[0]?.subjects.length;
+      let gradeCount = await Grade.count({ section, student, gradingPeriod });
+      if (targetCount === gradeCount) {
+        return res
+          .response({
+            message: "complete",
+            target: target[0]?.subjects.length,
+            gradeCount,
+          })
+          .code(200);
+      }
+      return res
+        .response({
+          message: "incomplete",
+          target: target[0]?.subjects.length,
+          gradeCount,
+        })
+        .code(200);
     } else {
       console.log(false);
       return res
@@ -166,9 +184,17 @@ internals.sendSMS = async (req, res) => {
 
   try {
     let target = await Section.find({ section });
+    let targetCount = target[0]?.subjects.length;
     let gradeCount = await Grade.count({ section, student, gradingPeriod });
-    console.log("lenght", target[0]?.subjects.length);
+    if (targetCount === gradeCount) {
+      return {
+        message: "complete",
+        target: target[0]?.subjects.length,
+        gradeCount,
+      };
+    }
     return {
+      message: "incomplete",
       target: target[0]?.subjects.length,
       gradeCount,
     };

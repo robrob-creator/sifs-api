@@ -52,6 +52,7 @@ const UserSchema = new mongoose.Schema(
     gradeLevel: { type: String },
     role: { type: Array },
     idNo: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String },
     strand_track: String,
