@@ -52,7 +52,7 @@ internals.create_grade = async (req, res) => {
             apikey: process.env.API_KEY,
             number: phoneNumber,
             message:
-              "Your Grades have been uploaded, please visit the link provided to view your grades. Please use your LRN and password to access your account. Link: https://main--nimble-valkyrie-c8d07b.netlify.app/student", // or the sendername you applied for
+              "Your Grades have been uploaded, please visit the link provided to view your grades. Please use your LRN and password to access your account.", // or the sendername you applied for
           };
           let response = await Semaphore.send(obj);
           console.log(response);
@@ -62,7 +62,7 @@ internals.create_grade = async (req, res) => {
             apikey: process.env.API_KEY,
             number: phoneNumber,
             message:
-              "Link: https://main--nimble-valkyrie-c8d07b.netlify.app/student", // or the sendername you applied for
+              "Your Grades have been uploaded, please visit the link provided to view your grades. Please use your LRN and password to access your account. Link: https://main--nimble-valkyrie-c8d07b.netlify.app/student", // or the sendername you applied for
           };
           let response = await Semaphore.send(obj);
           console.log(response);
