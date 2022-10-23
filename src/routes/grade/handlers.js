@@ -62,7 +62,7 @@ internals.create_grade = async (req, res) => {
             apikey: process.env.API_KEY,
             number: phoneNumber,
             message:
-              "Please use your LRN and password to access your account. Link: https://main--nimble-valkyrie-c8d07b.netlify.app/student", // or the sendername you applied for
+              "https://main--nimble-valkyrie-c8d07b.netlify.app/student \nPlease use your LRN and password to access your account.", // or the sendername you applied for
           };
           let response = await Semaphore.send(obj);
           console.log(response);
