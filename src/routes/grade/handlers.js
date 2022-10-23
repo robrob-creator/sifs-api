@@ -47,15 +47,12 @@ internals.create_grade = async (req, res) => {
       }).populate("subject");
 
       if (targetCount === grade.length) {
-        let gradeMsg = grade
-          .map((item, index) => `${item?.subject?.name}:${item.grade}`)
-          .join("\n");
-
         let SendSMS = async () => {
           let obj = {
             apikey: process.env.API_KEY,
             number: phoneNumber,
-            message: `Your grades has been uploaded \n${gradeMsg}`, // or the sendername you applied for
+            message:
+              "Your Grades have been uploaded, please visit the link provided to view your grades. Please use your LRN and password to access your account. \n https://main--nimble-valkyrie-c8d07b.netlify.app/student", // or the sendername you applied for
           };
           let response = await Semaphore.send(obj);
           console.log(response);
@@ -68,7 +65,7 @@ internals.create_grade = async (req, res) => {
             target: target[0]?.subjects.length,
             gradeCount: grade.length,
             phoneNumber,
-            gradeMsg,
+            result,
           })
           .code(200);
       }
@@ -78,6 +75,7 @@ internals.create_grade = async (req, res) => {
           target: target[0]?.subjects.length,
           gradeCount: grade.length,
           phoneNumber,
+          result,
         })
         .code(200);
     } else {
