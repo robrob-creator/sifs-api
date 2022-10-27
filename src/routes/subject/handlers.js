@@ -60,4 +60,14 @@ internals.delete_subjects = async (req, res) => {
   console.log(r);
   return res.response({ message: "success" }).code(200);
 };
+internals.edit_subject = async (req, res) => {
+  const updatorId = req.auth.credentials._id;
+  const id = req.params.id;
+  const filter = { _id: id };
+  const payload = { ...req.payload, updatorId };
+
+  let r = await Subjects.findOneAndUpdate(filter, payload);
+  console.log(r);
+  return res.response({ message: "success" }).code(200);
+};
 module.exports = internals;
