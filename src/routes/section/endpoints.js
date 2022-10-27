@@ -39,6 +39,12 @@ internals.endpoints = [
     handler: Handlers.delete_section,
     config: { auth: "token" },
   },
+  {
+    method: ["POST"],
+    path: "/one-subject/{id}",
+    handler: Handlers.addOneSubject,
+    config: { auth: "token" },
+  },
 ];
 
 module.exports = internals;
