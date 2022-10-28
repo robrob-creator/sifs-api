@@ -12,6 +12,10 @@ var SubjectSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    schedule: {
+      type: String,
+      required: false,
+    },
     description: {
       type: String,
       required: false,
