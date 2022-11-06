@@ -55,6 +55,7 @@ internals.create_user = async (req, res) => {
         .code(409);
     else {
       return User.findOne({ userName: req.payload.userName }).then((data) => {
+        console.log(data);
         if (data)
           return res
             .response({
