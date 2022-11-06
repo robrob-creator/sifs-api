@@ -11,11 +11,10 @@ internals.create_message = async (req, res) => {
   const sender = req?.auth?.credentials?._id;
   var messageData = new Feedback({
     ...req.payload,
-    sender,
   });
   try {
     let result = await messageData.save();
-    return res.response(result).code(200);
+    return res.response(sender).code(200);
   } catch (error) {
     console.log(error);
     return res.response(error).code(500);
