@@ -22,7 +22,6 @@ var SubjectSchema = new Schema(
     },
     units: {
       type: Number,
-      require: true,
     },
     updatorId: {
       type: mongoose.Schema.Types.ObjectId,
