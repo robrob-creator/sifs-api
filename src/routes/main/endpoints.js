@@ -11,6 +11,14 @@ internals.endpoints = [
       auth: false,
     },
   },
+  {
+    method: "POST",
+    path: "/teacher-login",
+    handler: Handlers.teacherLogin,
+    config: {
+      auth: false,
+    },
+  },
 ];
 
 module.exports = internals;
