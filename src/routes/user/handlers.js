@@ -54,22 +54,38 @@ internals.create_user = async (req, res) => {
         })
         .code(409);
     else {
-      return User.findOne({ userName: req.payload.userName }).then((data) => {
-        console.log(data);
-        if (data)
-          return res
-            .response({
-              message: "Username already taken.",
-            })
-            .code(409);
-        else {
-          return userData.save().then(async (data) => {
-            return res.response(data).code(200);
-          });
-        }
+      return userData.save().then(async (data) => {
+        return res.response(data).code(200);
       });
     }
   });
+};
+internals.create_teacher = async (req, res) => {
+  const hashedPassword = await bcrypt.hash(req.payload.password, 10);
+  var payload = { ...req.payload, password: hashedPassword };
+  var userData = new User(payload);
+
+  return await User.findOne({ idNo: req.payload.userName }).then(
+    (data, error) => {
+      if (error)
+        return res
+          .response({
+            message: "Error in the server",
+          })
+          .code(500);
+      if (data)
+        return res
+          .response({
+            message: "Username already taken.",
+          })
+          .code(409);
+      else {
+        return userData.save().then(async (data) => {
+          return res.response(data).code(200);
+        });
+      }
+    }
+  );
 };
 internals.get_user = async (req, h) => {
   let { id, role } = req.query;

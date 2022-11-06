@@ -11,6 +11,12 @@ internals.endpoints = [
   },
   {
     method: "POST",
+    path: "/teacher",
+    handler: Handlers.create_teacher,
+    config: { auth: "token" },
+  },
+  {
+    method: "POST",
     path: "/user/{id}",
     handler: Handlers.edit_user,
     config: { auth: "token" },
