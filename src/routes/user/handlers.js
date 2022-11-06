@@ -54,8 +54,18 @@ internals.create_user = async (req, res) => {
         })
         .code(409);
     else {
-      return userData.save().then(async (data) => {
-        return res.response(data).code(200);
+      return User.findOne({ userName: req.payload.userName }).then((data) => {
+        if (data)
+          return res
+            .response({
+              message: "Username already taken.",
+            })
+            .code(409);
+        else {
+          return userData.save().then(async (data) => {
+            return res.response(data).code(200);
+          });
+        }
       });
     }
   });
@@ -98,9 +108,17 @@ internals.edit_user = async (req, res) => {
   const filter = { _id: id };
   const payload = { ...req.payload, updatorId };
   try {
-    let r = await User.findOneAndUpdate(filter, payload);
-    console.log(r);
-    return res.response({ message: "success" }).code(200);
+    return await User.find({ userName: req?.payload?.userName }).then(() => {
+      if (data)
+        return res
+          .response({
+            message: "Username already taken.",
+          })
+          .code(409);
+      else User.findOneAndUpdate(filter, payload);
+
+      return res.response({ message: "success" }).code(200);
+    });
   } catch (err) {
     res.response({ message: "error" }).code(500);
   }
