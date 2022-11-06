@@ -60,7 +60,7 @@ internals.teacherLogin = async (req, res) => {
     if (!_profile) {
       return res
         .response({
-          message: "ID no. invalid.",
+          message: "Username invalid.",
         })
         .code(404);
     }
