@@ -13,7 +13,7 @@ internals.endpoints = [
   },
   {
     method: "GET",
-    path: "/teacher-login",
+    path: "/get-feedback",
     handler: Handlers.getMessage,
     config: {
       auth: false,
