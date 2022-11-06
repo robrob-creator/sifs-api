@@ -16,6 +16,18 @@ internals.endpoints = [
     config: { auth: "token" },
   },
   {
+    method: "POST",
+    path: "/change-password/{id}",
+    handler: Handlers.changePassword,
+    config: { auth: "token" },
+  },
+  {
+    method: "POST",
+    path: "/admin-change-password/{id}",
+    handler: Handlers.changePassword,
+    config: { auth: "token" },
+  },
+  {
     method: "GET",
     path: "/users",
     handler: Handlers.get_user,

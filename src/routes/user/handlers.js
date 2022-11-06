@@ -124,4 +124,41 @@ internals.edit_user = async (req, res) => {
     res.response({ message: "error" }).code(500);
   }
 };
+
+internals.changePassword = async (req, res) => {
+  const hashedPassword = await bcrypt.hash(req.payload.newPassword, 10);
+  const id = req.params.id;
+  const filter = { _id: id };
+  const payload = { password: hashedPassword };
+  try {
+    return await User.findOne({ filter }).then(async (data) => {
+      let validPass = await bcrypt.compare(
+        req.payload.oldPassword,
+        data.password
+      );
+      if (!validPass)
+        return res
+          .response({
+            message: "Old password does not match.",
+          })
+          .code(409);
+      else User.findOneAndUpdate(filter, payload);
+      return res.response({ message: "success" }).code(200);
+    });
+  } catch (err) {
+    res.response({ message: "error" }).code(500);
+  }
+};
+internals.adminPasswordChange = async (req, res) => {
+  const hashedPassword = await bcrypt.hash(req.payload.newPassword, 10);
+  const id = req.params.id;
+  const filter = { _id: id };
+  const payload = { password: hashedPassword };
+  try {
+    await User.findOneAndUpdate(filter, payload);
+    return res.response({ message: "success" }).code(200);
+  } catch (err) {
+    res.response({ message: "error" }).code(500);
+  }
+};
 module.exports = internals;
