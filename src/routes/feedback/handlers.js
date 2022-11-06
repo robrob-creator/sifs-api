@@ -8,7 +8,7 @@ const ObjectId = require("mongoose").Types.ObjectId;
 var internals = {};
 
 internals.create_message = async (req, res) => {
-  const sender = req.auth.credentials._id;
+  const sender = req?.auth?.credentials?._id;
   var messageData = new Feedback({
     ...req.payload,
     sender,
@@ -58,7 +58,7 @@ internals.getMessage = async (req, h) => {
       .code(200);
   }
 };
-
+/*
 internals.edit_message = async (req, res) => {
   const updatorId = req.auth.credentials._id;
   const id = req.params.id;
@@ -79,5 +79,5 @@ internals.delete_message = async (req, res) => {
   let r = await Feedback.findOneAndUpdate(filter, payload);
   console.log(r);
   return res.response({ message: "success" }).code(200);
-};
+};*/
 module.exports = internals;
