@@ -24,7 +24,7 @@ internals.endpoints = [
   {
     method: "POST",
     path: "/admin-change-password/{id}",
-    handler: Handlers.changePassword,
+    handler: Handlers.adminPasswordChange,
     config: { auth: "token" },
   },
   {
