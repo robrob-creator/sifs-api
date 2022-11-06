@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema(
     suffix: { type: String },
     gradeLevel: { type: String },
     role: { type: Array },
-    idNo: { type: String, required: true },
+    idNo: { type: String },
     phoneNumber: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String },
