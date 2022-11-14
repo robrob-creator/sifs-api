@@ -27,6 +27,12 @@ internals.endpoints = [
     handler: Handlers.getGradesByStudent,
     config: { auth: "token" },
   },
+  {
+    method: ["POST"],
+    path: "/edit-grade/{id}",
+    handler: Handlers.edit_section,
+    config: { auth: "token" },
+  },
 ];
 
 module.exports = internals;
