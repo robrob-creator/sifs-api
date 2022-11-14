@@ -30,7 +30,7 @@ internals.endpoints = [
   {
     method: ["POST"],
     path: "/edit-grade/{id}",
-    handler: Handlers.edit_section,
+    handler: Handlers.edit_grade,
     config: { auth: "token" },
   },
 ];
