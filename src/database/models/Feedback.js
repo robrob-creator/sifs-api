@@ -19,16 +19,17 @@ var FeedbackSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
     },
-    raview: {
-      type: Object,
-    },
+    raview: { Questionaire },
     subject: {
       type: String,
     },
     seen: {
       type: Boolean,
     },
-    grade: { ref: Questionaire },
+    grade: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Grades",
+    },
     resolved: {
       type: Boolean,
       default: false,
