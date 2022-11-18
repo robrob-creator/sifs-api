@@ -19,7 +19,7 @@ var FeedbackSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
     },
-    raview: { Questionaire },
+    review: { Questionaire },
     subject: {
       type: String,
     },
