@@ -11,6 +11,9 @@ var FeedbackSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
     },
+    raview: {
+      type: Object,
+    },
     resolved: {
       type: Boolean,
       default: false,
