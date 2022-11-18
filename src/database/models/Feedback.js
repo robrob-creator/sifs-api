@@ -14,6 +14,9 @@ var FeedbackSchema = new Schema(
     raview: {
       type: Object,
     },
+    statues: {
+      type: String,
+    },
     resolved: {
       type: Boolean,
       default: false,
