@@ -28,10 +28,7 @@ var FeedbackSchema = new Schema(
     seen: {
       type: Boolean,
     },
-    grade: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: { Questionaire },
-    },
+    grade: { ref: Questionaire },
     resolved: {
       type: Boolean,
       default: false,
