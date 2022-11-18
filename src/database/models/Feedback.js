@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+var Questionaire = new Schema({
+  1: { type: String },
+  2: { type: String },
+  3: { type: String },
+  4: { type: String },
+  5: { type: String },
+});
+
 var FeedbackSchema = new Schema(
   {
     sender: {
@@ -22,7 +30,7 @@ var FeedbackSchema = new Schema(
     },
     grade: {
       type: mongoose.Schema.Types.ObjectId,
-      type: {},
+      ref: { Questionaire },
     },
     resolved: {
       type: Boolean,
