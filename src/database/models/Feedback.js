@@ -14,8 +14,15 @@ var FeedbackSchema = new Schema(
     raview: {
       type: Object,
     },
-    status: {
+    subject: {
       type: String,
+    },
+    seen: {
+      type: Boolean,
+    },
+    grade: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Grades",
     },
     resolved: {
       type: Boolean,
