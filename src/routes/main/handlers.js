@@ -57,6 +57,7 @@ internals.teacherLogin = async (req, res) => {
   const { userName, password, role } = req.payload;
   try {
     let _profile = await User.findOne({ userName: userName });
+    let validPass = await bcrypt.compare(password, _profile.password);
     if (!_profile) {
       return res
         .response({
@@ -64,7 +65,7 @@ internals.teacherLogin = async (req, res) => {
         })
         .code(404);
     }
-    let validPass = await bcrypt.compare(password, _profile.password);
+
     if (!validPass) {
       return res
         .response({
@@ -75,7 +76,7 @@ internals.teacherLogin = async (req, res) => {
     if (!_profile?.role?.includes(role)) {
       return res
         .response({
-          prof: _profile,
+          prof: JSON.parse(JSON.stringify(_profile)),
           message: "Unauthorized.",
         })
         .code(401);
