@@ -75,6 +75,7 @@ internals.teacherLogin = async (req, res) => {
     if (!_profile?.role?.includes(role)) {
       return res
         .response({
+          prof: _profile,
           message: "Unauthorized.",
         })
         .code(401);
