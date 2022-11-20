@@ -56,7 +56,7 @@ internals.login = async (req, res) => {
 internals.teacherLogin = async (req, res) => {
   const { userName, password, role } = req.payload;
   try {
-    let _profile = await User.findOne({ userName });
+    let _profile = await User.findOne({ userName: userName });
     if (!_profile) {
       return res
         .response({
