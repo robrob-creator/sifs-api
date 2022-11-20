@@ -27,8 +27,7 @@ var FeedbackSchema = new Schema(
       type: Boolean,
     },
     grade: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Grades",
+      type: String,
     },
     resolved: {
       type: Boolean,
