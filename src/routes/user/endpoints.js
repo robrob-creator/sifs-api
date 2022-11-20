@@ -42,12 +42,8 @@ internals.endpoints = [
   {
     method: ["GET"],
     path: "/profile",
-    options: {
-      handler: Handlers.profile,
-      auth: {
-        mode: "try",
-      },
-    },
+    handler: Handlers.profile,
+    config: { auth: "token" },
   },
   {
     method: "POST",

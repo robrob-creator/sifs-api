@@ -8,12 +8,7 @@ var internals = {};
 internals.profile = async (req, reply) => {
   try {
     let _profile = await User.findOne({
-      $or: [
-        {
-          idNo: req.auth.credentials.idNo,
-        },
-        { userName: req.auth.credentials.userName },
-      ],
+      _id: req.auth.credentials._id,
     });
 
     let profile = JSON.parse(JSON.stringify(_profile));
