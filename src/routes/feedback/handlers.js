@@ -57,8 +57,8 @@ internals.getMessage = async (req, h) => {
       .code(200);
   }
 };
-/*
-internals.edit_message = async (req, res) => {
+
+internals.editFeedBack = async (req, res) => {
   const updatorId = req.auth.credentials._id;
   const id = req.params.id;
   const filter = { _id: id };
@@ -68,7 +68,7 @@ internals.edit_message = async (req, res) => {
   console.log(r);
   return res.response({ message: "success" }).code(200);
 };
-
+/*
 internals.delete_message = async (req, res) => {
   const updatorId = req.auth.credentials._id;
   const id = req.params.id;

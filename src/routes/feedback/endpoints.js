@@ -19,6 +19,12 @@ internals.endpoints = [
       auth: false,
     },
   },
+  {
+    method: ["POST"],
+    path: "/edit-feedback/{id}",
+    handler: Handlers.editFeedBack,
+    config: { auth: "token" },
+  },
 ];
 
 module.exports = internals;
