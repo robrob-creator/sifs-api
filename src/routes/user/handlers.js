@@ -177,4 +177,15 @@ internals.adminPasswordChange = async (req, res) => {
     res.response({ message: "error" }).code(500);
   }
 };
+internals.create_csv_user = async (req, res) => {
+  try {
+    var payload = req.payload;
+    const result = await User.insertMany(payload);
+    console.log(`${result.insertedCount} documents were inserted`);
+    return res.response({ message: "success" }).code(200);
+  } catch (err) {
+    console.log(err);
+    return res.response({ message: "error" }).code(500);
+  }
+};
 module.exports = internals;

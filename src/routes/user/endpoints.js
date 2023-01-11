@@ -11,6 +11,12 @@ internals.endpoints = [
   },
   {
     method: "POST",
+    path: "/user-csv",
+    handler: Handlers.create_csv_user,
+    config: { auth: "token" },
+  },
+  {
+    method: "POST",
     path: "/teacher",
     handler: Handlers.create_teacher,
     config: { auth: "token" },
