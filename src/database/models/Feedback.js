@@ -29,6 +29,10 @@ var FeedbackSchema = new Schema(
     grade: {
       type: String,
     },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
     resolved: {
       type: Boolean,
       default: false,
