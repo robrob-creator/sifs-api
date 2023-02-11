@@ -23,7 +23,7 @@ internals.create_message = async (req, res) => {
 
 internals.getMessage = async (req, h) => {
   let { pageSize, page, reciever, sender, id } = req.query;
-  let query = { deleted: false };
+  let query = { deleted: { $ne: false } };
   if (reciever) {
     query = { ...query, reciever };
   }
