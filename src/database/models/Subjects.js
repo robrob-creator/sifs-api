@@ -8,6 +8,11 @@ var SubjectSchema = new Schema(
       type: String,
       require: true,
     },
+    subject_code: {
+      //FILIPINO,ENGLISH, MATH
+      type: String,
+      require: true,
+    },
     deleted: {
       type: Boolean,
       default: false,
