@@ -3,7 +3,7 @@
 var Mongoose = require("mongoose"),
   Config = require("../config");
 var connection_string =
-  "mongodb+srv://robert:cumarob27@cluster0.sq4pi0p.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://robert:RgCEmlQrJeGgSYgQ@cluster0.8rzb4dt.mongodb.net/?retryWrites=true&w=majority";
 
 console.log("Config.mongodb", connection_string);
 Mongoose.Promise = global.Promise;
