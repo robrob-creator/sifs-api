@@ -9,7 +9,7 @@ let Subject = require("../routes/subject/endpoints");
 let Section = require("../routes/section/endpoints");
 let Grade = require("../routes/grade/endpoints");
 let Feedback = require("../routes/feedback/endpoints");
-let Test = requireq("../routes/tests/endpoints");
+let Test = require("../routes/tests/endpoints");
 
 internals.routes = [
   ...Student.endpoints,
