@@ -1,0 +1,82 @@
+{
+  "line": 1,
+  "elements": [
+    {
+      "start_timestamp": "2023-11-30T15:50:38.165",
+      "line": 4,
+      "name": "Authentication",
+      "description": "",
+      "id": "Authentication",
+      "type": "scenario",
+      "keyword": "Scenario",
+      "steps": [
+        {
+          "result": {
+            "status": "success"
+          },
+          "line": 0,
+          "name": "When I enter bughunter@gmail.com in field with key:email_address",
+          "match": {
+            "location": "com.aiotests.samples.stepdefs.TemperatureTrackerTests.validate_graph()"
+          },
+          "keyword": "When"
+        },
+        {
+          "result": {
+            "status": "success"
+          },
+          "line": 1,
+          "name": "Then I enter 12346 in field with key:password",
+          "match": {
+            "location": "com.aiotests.samples.stepdefs.TemperatureTrackerTests.validate_graph()"
+          },
+          "keyword": "Then"
+        },
+        {
+          "result": {
+            "status": "success"
+          },
+          "line": 2,
+          "name": "Then I tap LOG IN",
+          "match": {
+            "location": "com.aiotests.samples.stepdefs.TemperatureTrackerTests.validate_graph()"
+          },
+          "keyword": "Then"
+        },
+        {
+          "result": {
+            "status": "success"
+          },
+          "line": 3,
+          "name": "When I wait for 3",
+          "match": {
+            "location": "com.aiotests.samples.stepdefs.TemperatureTrackerTests.validate_graph()"
+          },
+          "keyword": "When"
+        },
+        {
+          "result": {
+            "status": "success"
+          },
+          "line": 4,
+          "name": "Then I see SCAN QR TO LOGIN",
+          "match": {
+            "location": "com.aiotests.samples.stepdefs.TemperatureTrackerTests.validate_graph()"
+          },
+          "keyword": "Then"
+        }
+      ],
+      "tags": [
+        {
+          "name": "@OC-TC-162 @JREQ-OC-403"
+        }
+      ]
+    }
+  ],
+  "name": "Authentication",
+  "description": "",
+  "id": "Mobile Auth - Authenticate user by email address and password",
+  "keyword": "Feature",
+  "uri": "/Users/rrickyzz/Documents/flutter_projects/onecb_device_registration_app/assets/features/MobileAppUserAuth.feature",
+  "tags": ["@OC-TC-162 @JREQ-OC-403"]
+}
