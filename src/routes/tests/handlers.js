@@ -17,7 +17,7 @@ internals.create_message = async (req, res) => {
 
     return res.response(sender).code(200);
   } catch (error) {
-    //console.log(error);
+    console.log(error);
     return res.response(error).code(500);
   }
 };
