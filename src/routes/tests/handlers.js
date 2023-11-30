@@ -9,16 +9,26 @@ var internals = {};
 internals.create_message = async (req, res) => {
   const sender = req?.auth?.credentials?._id;
 
+  var payload = req.payload;
+  if (typeof payload === "string") {
+    try {
+      payload = JSON.parse(payload);
+    } catch (error) {
+      console.log(error);
+      return res.response(error).code(400);
+    }
+  }
+
   var messageData = new Test({
-    line: req.payload.line,
-    elements: req.payload.elements,
-    name: req.payload.name,
-    tags: req.payload.tags,
-    description: req.payload.description,
-    id: req.payload.id,
-    keyword: req.payload.keyword,
-    uri: req.payload.uri,
-    tags: req.payload.tags,
+    line: payload.line,
+    elements: payload.elements,
+    name: payload.name,
+    tags: payload.tags,
+    description: payload.description,
+    id: payload.id,
+    keyword: payload.keyword,
+    uri: payload.uri,
+    tags: payload.tags,
   });
 
   try {
