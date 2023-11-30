@@ -8,12 +8,13 @@ var internals = {};
 
 internals.create_message = async (req, res) => {
   const sender = req?.auth?.credentials?._id;
+
   var messageData = new Test({
     results: req.payload,
   });
-  console.log(messageData);
+
   try {
-    let result = await messageData.save();
+    await messageData.save();
 
     return res.response(sender).code(200);
   } catch (error) {
