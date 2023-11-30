@@ -10,7 +10,15 @@ internals.create_message = async (req, res) => {
   const sender = req?.auth?.credentials?._id;
 
   var messageData = new Test({
-    results: req.payload,
+    line: req.payload.line,
+    elements: req.payload.elements,
+    name: req.payload.name,
+    tags: req.payload.tags,
+    description: req.payload.description,
+    id: req.payload.id,
+    keyword: req.payload.keyword,
+    uri: req.payload.uri,
+    tags: req.payload.tags,
   });
 
   try {
