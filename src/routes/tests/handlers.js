@@ -42,7 +42,7 @@ internals.create_message = async (req, res) => {
 };
 
 internals.getMessage = async (req, h) => {
-  let { pageSize, page, reciever, sender, id } = req.query;
+  let { pageSize, page, reciever, sender, id, tags } = req.query;
   let query = { deleted: { $ne: true } };
   if (reciever) {
     query = { ...query, reciever };
@@ -53,13 +53,22 @@ internals.getMessage = async (req, h) => {
   if (id) {
     query = { ...query, _id: id };
   }
+  if (tags) {
+    query = { ...query, tags: { $in: tags } };
+  }
   try {
-    let list = await Test.find(query)
+    let count = await Test.countDocuments(query);
+    let totalPages = Math.ceil(count / pageSize);
+    let skip = (totalPages - page - 1) * pageSize; // Calculate the skip value to start from the last page
 
+    let list = await Test.find(query)
       .limit(pageSize)
-      .skip(page * pageSize);
+      .skip(skip)
+      .sort({ _id: -1 }); // Sort by _id in descending order to get the latest data first
+
     return h
       .response({
+        count: count,
         errorCodes: [],
         data: {
           list,
@@ -87,6 +96,34 @@ internals.editFeedBack = async (req, res) => {
   console.log(r);
   return res.response({ message: "success" }).code(200);
 };
+
+internals.downloadJson = async (req, res) => {
+  try {
+    const payload = req.payload;
+
+    // Convert the payload to a JSON string
+    const jsonString = JSON.stringify(payload, null, 2);
+
+    // Set response headers for downloading a file
+
+    // Send the JSON as the response
+    return res
+      .response(jsonString)
+      .header("Content-Type", "application/json")
+      .header("Content-Disposition", "attachment; filename=data.json");
+  } catch (err) {
+    console.error(err);
+
+    // Handle the error and send an appropriate response
+    return res
+      .response({
+        errorCodes: [],
+        message: "Error occurred while processing the request",
+      })
+      .code(500);
+  }
+};
+
 /*
 internals.delete_message = async (req, res) => {
   const updatorId = req.auth.credentials._id;

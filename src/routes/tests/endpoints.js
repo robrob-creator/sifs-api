@@ -23,7 +23,13 @@ internals.endpoints = [
     method: ["POST"],
     path: "/edit-test/{id}",
     handler: Handlers.editFeedBack,
-    config: { auth: "token" },
+    config: { auth: false },
+  },
+  {
+    method: ["POST"],
+    path: "/test/download",
+    handler: Handlers.downloadJson,
+    config: { auth: false },
   },
 ];
 
